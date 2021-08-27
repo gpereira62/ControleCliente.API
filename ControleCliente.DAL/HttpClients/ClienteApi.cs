@@ -27,28 +27,44 @@ namespace ControleCliente.DAL.HttpClients
 
         public async Task<IEnumerable<Cliente>> GetAll()
         {
-            _request.RequestUri = new System.Uri("https://public-api2.ploomes.com/Users");
+            _request.RequestUri = new System.Uri("https://app21-api2.ploomes.com/Contacts");
             _request.Method = HttpMethod.Get;
-            HttpResponseMessage response = await _httpClient.SendAsync(_request);
-            Response responseResult = JsonConvert.DeserializeObject<Response>(response.Content.ReadAsStringAsync().Result);
-            return await Task.FromResult(responseResult.Clientes);
+
+            HttpResponseMessage responseMessage = await _httpClient.SendAsync(_request);
+            Response response = JsonConvert.DeserializeObject<Response>(responseMessage.Content.ReadAsStringAsync().Result);
+            return await Task.FromResult(response.Clientes);
         }
 
         public async Task Add(Cliente cliente)
         {
-            _request.RequestUri = new System.Uri("https://public-api2.ploomes.com/Users");
+            var json = JsonConvert.SerializeObject(cliente);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            _request.RequestUri = new System.Uri("$https://app21-api2.ploomes.com/Contacts");
             _request.Method = HttpMethod.Post;
-            HttpResponseMessage response = await _httpClient.SendAsync(_request);
+            _request.Content = stringContent;
+
+            await _httpClient.SendAsync(_request);
         }
 
-        public Task Update(Cliente cliente)
+        public async Task Update(int id, Cliente cliente)
         {
-            throw new NotImplementedException();
+            var json = JsonConvert.SerializeObject(cliente);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            _request.RequestUri = new System.Uri(string.Format("https://app21-api2.ploomes.com/Contacts({0})", id));
+            _request.Method = HttpMethod.Patch;
+            _request.Content = stringContent;
+
+            await _httpClient.SendAsync(_request);
         }
 
-        public Task Delete(Cliente cliente)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            _request.RequestUri = new System.Uri(string.Format("https://app21-api2.ploomes.com/Contacts({0})", id));
+            _request.Method = HttpMethod.Delete;
+
+            await _httpClient.SendAsync(_request);
         }
     }
 }

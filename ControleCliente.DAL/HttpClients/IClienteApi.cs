@@ -11,7 +11,7 @@ namespace ControleCliente.DAL.HttpClients
     {
         Task<IEnumerable<Cliente>> GetAll();
         Task Add(Cliente cliente);
-        Task Update(Cliente cliente);
-        Task Delete(Cliente cliente);
+        Task Update(int id, Cliente cliente);
+        Task Delete(int id);
     }
 }

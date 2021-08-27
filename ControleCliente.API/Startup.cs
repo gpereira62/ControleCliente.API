@@ -10,7 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ControleCliente.API
@@ -29,12 +31,37 @@ namespace ControleCliente.API
         {
             services.AddScoped<IClienteApi, ClienteApi>();
 
-            services.AddControllers();
+            services.AddCors();
+
+            services.AddControllers()
+                .AddJsonOptions(opcoes =>
+                {
+                    opcoes.JsonSerializerOptions.IgnoreNullValues = true;
+                })
+                .AddNewtonsoftJson(opcoes =>
+                {
+                    opcoes.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ControleCliente.API", Version = "v1" });
-            });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Controle de Clientes",
+                    Description = "ASP.NET Web API - Controle de Clientes",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Gustavo",
+                        Email = "gustavopereirasantos@hotmail.com",
+                        Url = new System.Uri("https://github.com/gpereira62")
+                    },
+                });;
 
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +71,12 @@ namespace ControleCliente.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ControleCliente.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ControleEstoqueProduto.API v1"));
+            }
+            else if (env.IsProduction())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ControleEstoqueProduto.API v1"));
             }
 
             app.UseHttpsRedirection();
