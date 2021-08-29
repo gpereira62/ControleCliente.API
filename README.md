@@ -78,7 +78,12 @@ Passo a Passo:
 - Ao abrir, execute o comando "Update-database";
 - Agora execute o projeto; 
  	- Url: https://localhost:44382/swagger/index.html
-  
+- Para realizar as Requisições, é necessario criar um usuário primeiro
+	- POST - https://localhost:44382/api/v1/usuarios
+- E então pegar o Token do usuário que já foi cadastrado
+	- POST - https://localhost:44382/api/v1/conta/login
+- Com o Token, adicione no 
+
 ## Autor
 
 <a href=https://www.linkedin.com/in/gustavo-pereira-18302316a/>
@@ -98,3 +103,6 @@ Feito com ❤️ por Gustavo Pereira 👋🏽 Entre em contato!
   <a href="mailto:gustavopereirasantos@hotmail.com">
     <img src="https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white" />        
   </a>&nbsp;&nbsp;
+  
+## License
+This project is under the MIT license. See the [LICENSE](https://github.com/gpereira62/ControleCliente.API/blob/master/LICENSE) for more information.
