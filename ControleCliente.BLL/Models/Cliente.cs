@@ -10,15 +10,12 @@ namespace ControleCliente.BLL
     public class Cliente
     {
         [JsonProperty("Id")]
-        public int ClienteId { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("Name")]
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("Email")]
         public string Email { get; set; }
-
-        [JsonProperty("Phone")]
-        public string Telefone { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace ControleCliente.DAL.HttpClients
             var json = JsonConvert.SerializeObject(cliente);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            _request.RequestUri = new System.Uri("$https://app21-api2.ploomes.com/Contacts");
+            _request.RequestUri = new System.Uri("https://app21-api2.ploomes.com/Contacts");
             _request.Method = HttpMethod.Post;
             _request.Content = stringContent;
 

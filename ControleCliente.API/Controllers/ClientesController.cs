@@ -1,5 +1,6 @@
 ﻿using ControleCliente.BLL;
 using ControleCliente.DAL.HttpClients;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,9 +29,12 @@ namespace ControleCliente.API.Controllers
         /// </summary>
         /// <returns>Os clientes cadastrados</returns>
         /// <response code="200">Retorna uma lista dos clientes cadastrados</response>
+        /// <response code="401">Sem autorização para utilizar está requisição</response>
         [HttpGet]
         [Consumes("application/json")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
             return Ok( await _clienteApi.GetAll() );
@@ -45,20 +49,20 @@ namespace ControleCliente.API.Controllers
         ///
         ///     api/v1/clientes/
         ///     {
-        ///        "clienteId": 0,
-        ///        "nome": "Gustavo Pereira",
-        ///        "email": "gustavopereirasantos@hotmail.com",
-        ///        "telefone": "(11) 5891-8935"
+        ///        "Id": 0,
+        ///        "name": "Gustavo Pereira 2",
+        ///        "email": "gustavopereirasantos2@hotmail.com",
         ///     }
         ///
         /// </remarks>
         /// <returns>Um novo cliente criado</returns>
         /// <response code="201">Retorna o cliente indicando que ele foi criado com sucesso</response>
+        /// <response code="401">Sem autorização para utilizar está requisição</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(201)]
-        //[ProducesResponseType(typeof(ProdutoPostStatus200), StatusCodes.Status200OK)]
-        //[SwaggerRequestExample]
+        [ProducesResponseType(401)]
+        [Authorize]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             await _clienteApi.Add(cliente);
@@ -74,17 +78,19 @@ namespace ControleCliente.API.Controllers
         ///
         ///     api/v1/clientes/1
         ///     {
-        ///        "clienteId": 0,
-        ///        "nome": "Gustavo Pereira 2",
+        ///        "Id": 0,
+        ///        "name": "Gustavo Pereira 2",
         ///        "email": "gustavopereirasantos2@hotmail.com",
-        ///        "telefone": "(11) 5891-8965"
         ///     }
         ///
         /// </remarks>
         /// <returns>O cliente cadastrado pelo id informado</returns>
         /// <response code="200">Retorna o cliente editado indicando que foi alterado com sucesso</response>
+        /// <response code="401">Sem autorização para utilizar está requisição</response>
         [HttpPatch("{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [Authorize]
         public async Task<IActionResult> PatchCliente(int id, Cliente cliente)
         {
             await _clienteApi.Update(id, cliente);
@@ -97,8 +103,11 @@ namespace ControleCliente.API.Controllers
         /// </summary>
         /// <returns>Não é retornado nenhuma informação, indicando que a exclusão foi feita com sucesso</returns>
         /// <response code="200">Retorna vazio indicando que a exclusão foi feita com sucesso</response>
+        /// <response code="401">Sem autorização para utilizar está requisição</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [Authorize]
         public async Task<IActionResult> DeleteCliente(int id)
         {
             await _clienteApi.Delete(id);
