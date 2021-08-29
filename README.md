@@ -55,7 +55,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 { // Usuario
   "usuarioid": 1,                 // Id do Usuario
   "login": "gustavo",             // Login do Usuario
-  "senha": "gustavo@hotmail.com", // Senha do Usuario
+  "senha": "1234",                // Senha do Usuario
 }
 ```
 ## Testando a API
