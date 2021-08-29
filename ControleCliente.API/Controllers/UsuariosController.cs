@@ -49,8 +49,8 @@ namespace ControleCliente.API.Controllers
         ///     api/v1/usuarios/1
         ///     {
         ///        "usuarioid": 1,
-        ///        "login": "gustavo",
-        ///        "senha": "123",
+        ///        "login": "gustavo1",
+        ///        "senha": "1234",
         ///     }
         ///
         /// </remarks>
@@ -86,10 +86,9 @@ namespace ControleCliente.API.Controllers
         ///
         ///     api/v1/usuarios/
         ///     {
-        ///        "id": 1,
-        ///        "nome": "Produto 1",
-        ///        "qtde": 1,
-        ///        "ativo": true,
+        ///        "usuarioid": 1,
+        ///        "login": "gustavo",
+        ///        "senha": "123",
         ///     }
         ///
         /// </remarks>
@@ -98,7 +97,7 @@ namespace ControleCliente.API.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(201)]
-        public async Task<ActionResult<Usuario>> PostProduto(Usuario usuario)
+        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
             usuario.Login = usuario.Login.Trim();
             usuario.Senha = usuario.Senha.Trim();
