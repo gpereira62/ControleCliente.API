@@ -38,9 +38,8 @@ namespace ControleCliente.DAL.Repository
         Task<Usuario> IUsuarioRepository.GetToken(Usuario usuario)
         {
             IEnumerable<Usuario> users = GetAll().Result.Value;
-            return Task.FromResult(users.Where(x => x.Login.ToLower() == usuario.Login.ToLower() 
-                && x.Senha == usuario.Senha.ToLower())
-                .FirstOrDefault());
+            return Task.FromResult(users.FirstOrDefault(x => x.Login.ToLower() == usuario.Login.ToLower()
+                && x.Senha == usuario.Senha.ToLower()));
         }
 
         public bool UsuarioExists(int id)

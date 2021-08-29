@@ -13,10 +13,10 @@ namespace ControleCliente.DAL.Mapeamentos
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-			builder.HasKey(p => p.UsuarioId);
+			builder.HasKey(u => u.UsuarioId);
 
-            builder.Property(p => p.Login).IsRequired().HasMaxLength(20);
-            builder.Property(p => p.Senha).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.Login).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.Senha).IsRequired().HasMaxLength(20);
 
             builder.ToTable("Usuarios");
         }
