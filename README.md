@@ -25,7 +25,7 @@
 - [x] Delete um cliente pelo ID
 - [x] Utilizar Entity Framework
 - [x] Utilizar JWT - Token Bearer
-- [x] Criar/Consultar/Alterar Usuário para JWT
+- [x] Criar/Consultar/Alterar Usuário para JWT(JSON Web Token)
 - [x] Utilizar o SQL Server como banco de dados para o Usuário
 - [x] Utilizar o Design Pattern Repository para acessar o banco
 - [x] Utilizar o Swagger para Testar a API e Documenta-lá
@@ -78,11 +78,17 @@ Passo a Passo:
 - Ao abrir, execute o comando "Update-database";
 - Agora execute o projeto; 
  	- Url: https://localhost:44382/swagger/index.html
-- Para realizar as Requisições, é necessario criar um usuário primeiro
+
+![swagger](https://user-images.githubusercontent.com/42392839/131259153-ccb01f48-bdb6-4a5f-9cf6-8199cdb243b5.png)
+
+Como o projeto está utilizando JWT(JSON Web Token), será necessário seguir o passo a passo para realizar as requisições:
+
+- Crie um usuário primeiro
 	- POST - https://localhost:44382/api/v1/usuarios
-- E então pegar o Token do usuário que já foi cadastrado
+- E então pegue o Token utilizando o usuário cadastrado, Login e Senha
 	- POST - https://localhost:44382/api/v1/conta/login
-- Com o Token, adicione no 
+- Com o Token, adicione no Authorize do Swagger
+![image](https://user-images.githubusercontent.com/42392839/131259263-ca278cec-b7e7-4022-be9c-984dc507f246.png)
 
 ## Autor
 
